@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <style>
+        body {
+            background-color: pink;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 50px;
+            font-size: 3em;
+            text-shadow: 2px 2px #ff6f61;
+        }
+        p {
+            font-size: 1.2em;
+        }
+        .photos {
+            margin: 20px 0;
+        }
+        .links {
+            margin: 20px 0;
+        }
+        .button-container {
+            margin-top: 30px;
+        }
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #e55a50;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy Valentine&#39;s Day!</h1>
+    <p>Will you be my valentine?</p>
+
+    <div class="button-container">
+        <button onclick="alert('You said YES! ❤️')">YES</button>
+        <button onclick="alert('You also said YES! ❤️')">YES</button>
+    </div>
+
+    <div class="photos">
+        <h2>Our Photos</h2>
+        <input type="file" accept="image/*" onchange="previewPhoto(event)">
+        <div id="photo-preview"></div>
+    </div>
+
+    <div class="links">
+        <h2>Our Links</h2>
+        <input type="url" placeholder="Add a link" id="link-input">
+        <button onclick="addLink()">Add Link</button>
+        <ul id="links-list"></ul>
+    </div>
+
+    <script>
+        function previewPhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.style.maxWidth = '200px';
+                    img.style.margin = '10px';
+                    document.getElementById('photo-preview').appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function addLink() {
+            const input = document.getElementById('link-input');
+            const url = input.value;
+            if (url) {
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = url;
+                a.textContent = url;
+                a.target = '_blank';
+                li.appendChild(a);
+                document.getElementById('links-list').appendChild(li);
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
